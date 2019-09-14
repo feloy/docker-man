@@ -13,9 +13,9 @@ The manpages sources come from the `github.com/kuberntes/kubernetes` repository 
 
 First create some aliases: 
 ```
-$ alias kman="docker run -it --rm docker.pkg.github.com/feloy/docker-man/kman:latest man"
+$ alias kman="docker run -it --rm feloy/kman:latest man"
 
-$ alias kpropos="docker run -it --rm docker.pkg.github.com/feloy/docker-man/kman:latest apropos"
+$ alias kpropos="docker run -it --rm feloy/kman:latest apropos"
 ```
 
 Then access the Kubernetes manpages:
