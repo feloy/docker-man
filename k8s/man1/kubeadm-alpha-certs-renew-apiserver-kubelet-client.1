@@ -1,0 +1,81 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm alpha certs renew apiserver\-kubelet\-client \- Renew the certificate for the API server to connect to kubelet
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm alpha certs renew apiserver\-kubelet\-client\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Renew the certificate for the API server to connect to kubelet.
+
+.PP
+Renewals run unconditionally, regardless of certificate expiration date; extra attributes such as SANs will be based on the existing file/certificates, there is no need to resupply them.
+
+.PP
+Renewal by default tries to use the certificate authority in the local PKI managed by kubeadm; as alternative it is possible to use K8s certificate API for certificate renewal, or as a last option, to generate a CSR request.
+
+.PP
+After renewal, in order to make changes effective, is is required to restart control\-plane components and eventually re\-distribute the renewed certificate in case the file is used elsewhere.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-cert\-dir\fP="/etc/kubernetes/pki"
+    The path where to save the certificates
+
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-csr\-dir\fP=""
+    The path to output the CSRs and private keys to
+
+.PP
+\fB\-\-csr\-only\fP=false
+    Create CSRs instead of generating certificates
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-use\-api\fP=false
+    Use the Kubernetes certificate API to renew certificates
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-alpha\-certs\-renew(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

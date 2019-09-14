@@ -1,0 +1,51 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm alpha certs certificate\-key \- Generate certificate keys
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm alpha certs certificate\-key\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+This command will print out a secure randomly\-generated certificate key that can be used with
+the "init" command.
+
+.PP
+You can also use "kubeadm init \-\-upload\-certs" without specifying a certificate key and it will
+generate and print one for you.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-alpha\-certs(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

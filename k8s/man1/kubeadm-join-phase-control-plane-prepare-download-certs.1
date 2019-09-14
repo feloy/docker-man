@@ -1,0 +1,84 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm join phase control\-plane\-prepare download\-certs \- [EXPERIMENTAL] Download certificates shared among control\-plane nodes from the kubeadm\-certs Secret
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm join phase control\-plane\-prepare download\-certs\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+[EXPERIMENTAL] Download certificates shared among control\-plane nodes from the kubeadm\-certs Secret
+
+
+.SH OPTIONS
+.PP
+\fB\-\-certificate\-key\fP=""
+    Use this key to decrypt the certificate secrets uploaded by init.
+
+.PP
+\fB\-\-config\fP=""
+    Path to kubeadm config file.
+
+.PP
+\fB\-\-control\-plane\fP=false
+    Create a new control plane instance on this node
+
+.PP
+\fB\-\-discovery\-file\fP=""
+    For file\-based discovery, a file or URL from which to load cluster information.
+
+.PP
+\fB\-\-discovery\-token\fP=""
+    For token\-based discovery, the token used to validate cluster information fetched from the API server.
+
+.PP
+\fB\-\-discovery\-token\-ca\-cert\-hash\fP=[]
+    For token\-based discovery, validate that the root CA public key matches this hash (format: "<type>:<value>").
+
+.PP
+\fB\-\-discovery\-token\-unsafe\-skip\-ca\-verification\fP=false
+    For token\-based discovery, allow joining without \-\-discovery\-token\-ca\-cert\-hash pinning.
+
+.PP
+\fB\-\-tls\-bootstrap\-token\fP=""
+    Specify the token used to temporarily authenticate with the Kubernetes Control Plane while joining the node.
+
+.PP
+\fB\-\-token\fP=""
+    Use this token for both discovery\-token and tls\-bootstrap\-token when those values are not provided.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-join\-phase\-control\-plane\-prepare(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

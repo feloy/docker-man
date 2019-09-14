@@ -1,0 +1,72 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm init phase kubelet\-start \- Write kubelet settings and (re)start the kubelet
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm init phase kubelet\-start\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Write a file with KubeletConfiguration and an environment file with node specific kubelet settings, and then (re)start kubelet.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-cri\-socket\fP=""
+    Path to the CRI socket to connect. If empty kubeadm will try to auto\-detect this value; use this option only if you have more than one CRI installed or if you have non\-standard CRI socket.
+
+.PP
+\fB\-\-node\-name\fP=""
+    Specify the node name.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH EXAMPLE
+.PP
+.RS
+
+.nf
+  # Writes a dynamic environment file with kubelet flags from a InitConfiguration file.
+  kubeadm init phase kubelet\-start \-\-config config.yaml
+
+.fi
+.RE
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-init\-phase(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

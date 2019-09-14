@@ -1,0 +1,72 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm upgrade diff \- Show what differences would be applied to existing static pod manifests. See also: kubeadm upgrade apply \-\-dry\-run
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm upgrade diff\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Show what differences would be applied to existing static pod manifests. See also: kubeadm upgrade apply \-\-dry\-run
+
+
+.SH OPTIONS
+.PP
+\fB\-\-api\-server\-manifest\fP="/etc/kubernetes/manifests/kube\-apiserver.yaml"
+    path to API server manifest
+
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-c\fP, \fB\-\-context\-lines\fP=3
+    How many lines of context in the diff
+
+.PP
+\fB\-\-controller\-manager\-manifest\fP="/etc/kubernetes/manifests/kube\-controller\-manager.yaml"
+    path to controller manifest
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-scheduler\-manifest\fP="/etc/kubernetes/manifests/kube\-scheduler.yaml"
+    path to scheduler manifest
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-upgrade(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

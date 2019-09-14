@@ -1,0 +1,81 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm alpha kubelet config enable\-dynamic \- EXPERIMENTAL: Enable or update dynamic kubelet configuration for a Node
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm alpha kubelet config enable\-dynamic\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Enable or update dynamic kubelet configuration for a Node, against the kubelet\-config\-1.X ConfigMap in the cluster, where X is the minor version of the desired kubelet version.
+
+.PP
+WARNING: This feature is still experimental, and disabled by default. Enable only if you know what you are doing, as it may have surprising side\-effects at this stage.
+
+.PP
+Alpha Disclaimer: this command is currently alpha.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-kubelet\-version\fP=""
+    The desired version for the kubelet
+
+.PP
+\fB\-\-node\-name\fP=""
+    Name of the node that should enable the dynamic kubelet configuration
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH EXAMPLE
+.PP
+.RS
+
+.nf
+  # Enable dynamic kubelet configuration for a Node.
+  kubeadm alpha phase kubelet enable\-dynamic\-config \-\-node\-name node\-1 \-\-kubelet\-version 1.14.0
+  
+  WARNING: This feature is still experimental, and disabled by default. Enable only if you know what you are doing, as it
+  may have surprising side\-effects at this stage.
+
+.fi
+.RE
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-alpha\-kubelet\-config(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

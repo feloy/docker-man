@@ -1,0 +1,72 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm alpha certs renew all \- Renew all available certificates
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm alpha certs renew all\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Renew all known certificates necessary to run the control plane. Renewals are run unconditionally, regardless of expiration date. Renewals can also be run individually for more control.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-cert\-dir\fP="/etc/kubernetes/pki"
+    The path where to save the certificates
+
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-csr\-dir\fP=""
+    The path to output the CSRs and private keys to
+
+.PP
+\fB\-\-csr\-only\fP=false
+    Create CSRs instead of generating certificates
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-use\-api\fP=false
+    Use the Kubernetes certificate API to renew certificates
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-alpha\-certs\-renew(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

@@ -1,0 +1,399 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+cloud\-controller\-manager \-
+
+
+.SH SYNOPSIS
+.PP
+\fBcloud\-controller\-manager\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+The Cloud controller manager is a daemon that embeds
+the cloud specific control loops shipped with Kubernetes.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-address\fP=0.0.0.0
+    The IP address on which to serve the insecure \-\-port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
+
+.PP
+\fB\-\-allocate\-node\-cidrs\fP=false
+    Should CIDRs for Pods be allocated and set on the cloud provider.
+
+.PP
+\fB\-\-allow\-untagged\-cloud\fP=false
+    Allow the cluster to run without the cluster\-id on cloud instances. This is a legacy mode of operation and a cluster\-id will be required in the future.
+
+.PP
+\fB\-\-alsologtostderr\fP=false
+    log to standard error as well as files
+
+.PP
+\fB\-\-authentication\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create tokenaccessreviews.authentication.k8s.io. This is optional. If empty, all token requests are considered to be anonymous and no client CA is looked up in the cluster.
+
+.PP
+\fB\-\-authentication\-skip\-lookup\fP=false
+    If false, the authentication\-kubeconfig will be used to lookup missing authentication configuration from the cluster.
+
+.PP
+\fB\-\-authentication\-token\-webhook\-cache\-ttl\fP=10s
+    The duration to cache responses from the webhook token authenticator.
+
+.PP
+\fB\-\-authentication\-tolerate\-lookup\-failure\fP=false
+    If true, failures to look up missing authentication configuration from the cluster are not considered fatal. Note that this can result in authentication that treats all requests as anonymous.
+
+.PP
+\fB\-\-authorization\-always\-allow\-paths\fP=[/healthz]
+    A list of HTTP paths to skip during authorization, i.e. these are authorized without contacting the 'core' kubernetes server.
+
+.PP
+\fB\-\-authorization\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create subjectaccessreviews.authorization.k8s.io. This is optional. If empty, all requests not skipped by authorization are forbidden.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-authorized\-ttl\fP=10s
+    The duration to cache 'authorized' responses from the webhook authorizer.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-unauthorized\-ttl\fP=10s
+    The duration to cache 'unauthorized' responses from the webhook authorizer.
+
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-bind\-address\fP=0.0.0.0
+    The IP address on which to listen for the \-\-secure\-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank, all interfaces will be used (0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
+
+.PP
+\fB\-\-cert\-dir\fP=""
+    The directory where the TLS certs are located. If \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are provided, this flag will be ignored.
+
+.PP
+\fB\-\-cidr\-allocator\-type\fP="RangeAllocator"
+    Type of CIDR allocator to use
+
+.PP
+\fB\-\-client\-ca\-file\fP=""
+    If set, any request presenting a client certificate signed by one of the authorities in the client\-ca\-file is authenticated with an identity corresponding to the CommonName of the client certificate.
+
+.PP
+\fB\-\-cloud\-config\fP=""
+    The path to the cloud provider configuration file. Empty string for no configuration file.
+
+.PP
+\fB\-\-cloud\-provider\fP=""
+    The provider for cloud services. Empty string for no provider.
+
+.PP
+\fB\-\-cloud\-provider\-gce\-lb\-src\-cidrs\fP=130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16
+    CIDRs opened in GCE firewall for LB traffic proxy \& health checks
+
+.PP
+\fB\-\-cluster\-cidr\fP=""
+    CIDR Range for Pods in cluster. Requires \-\-allocate\-node\-cidrs to be true
+
+.PP
+\fB\-\-cluster\-name\fP="kubernetes"
+    The instance prefix for the cluster.
+
+.PP
+\fB\-\-concurrent\-service\-syncs\fP=1
+    The number of services that are allowed to sync concurrently. Larger number = more responsive service management, but more CPU (and network) load
+
+.PP
+\fB\-\-configure\-cloud\-routes\fP=true
+    Should CIDRs allocated by allocate\-node\-cidrs be configured on the cloud provider.
+
+.PP
+\fB\-\-contention\-profiling\fP=false
+    Enable lock contention profiling, if profiling is enabled
+
+.PP
+\fB\-\-controller\-start\-interval\fP=0s
+    Interval between starting controller managers.
+
+.PP
+\fB\-\-controllers\fP=[\fI]
+    A list of controllers to enable. '\fP\&' enables all on\-\&by\-\&default controllers, 'foo' enables the controller named 'foo', '\-\&foo' disables the controller named 'foo'.
+All controllers: cloud\-node, cloud\-node\-lifecycle, route, service
+Disabled\-by\-default controllers:
+
+.PP
+\fB\-\-external\-cloud\-volume\-plugin\fP=""
+    The plugin to use when cloud provider is set to external. Can be empty, should only be set when cloud\-provider is external. Currently used to allow node and volume controllers to work for in tree cloud providers.
+
+.PP
+\fB\-\-feature\-gates\fP=
+    A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+APIListChunking=true|false (BETA \- default=true)
+APIResponseCompression=true|false (BETA \- default=true)
+AllAlpha=true|false (ALPHA \- default=false)
+AppArmor=true|false (BETA \- default=true)
+AttachVolumeLimit=true|false (BETA \- default=true)
+BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
+BlockVolume=true|false (BETA \- default=true)
+BoundServiceAccountTokenVolume=true|false (ALPHA \- default=false)
+CPUManager=true|false (BETA \- default=true)
+CRIContainerLogRotation=true|false (BETA \- default=true)
+CSIBlockVolume=true|false (BETA \- default=true)
+CSIDriverRegistry=true|false (BETA \- default=true)
+CSIInlineVolume=true|false (ALPHA \- default=false)
+CSIMigration=true|false (ALPHA \- default=false)
+CSIMigrationAWS=true|false (ALPHA \- default=false)
+CSIMigrationAzureDisk=true|false (ALPHA \- default=false)
+CSIMigrationAzureFile=true|false (ALPHA \- default=false)
+CSIMigrationGCE=true|false (ALPHA \- default=false)
+CSIMigrationOpenStack=true|false (ALPHA \- default=false)
+CSINodeInfo=true|false (BETA \- default=true)
+CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
+CustomResourceDefaulting=true|false (ALPHA \- default=false)
+CustomResourcePublishOpenAPI=true|false (BETA \- default=true)
+CustomResourceSubresources=true|false (BETA \- default=true)
+CustomResourceValidation=true|false (BETA \- default=true)
+CustomResourceWebhookConversion=true|false (BETA \- default=true)
+DebugContainers=true|false (ALPHA \- default=false)
+DevicePlugins=true|false (BETA \- default=true)
+DryRun=true|false (BETA \- default=true)
+DynamicAuditing=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=true)
+EvenPodsSpread=true|false (ALPHA \- default=false)
+ExpandCSIVolumes=true|false (ALPHA \- default=false)
+ExpandInUsePersistentVolumes=true|false (BETA \- default=true)
+ExpandPersistentVolumes=true|false (BETA \- default=true)
+ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
+ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
+HPAScaleToZero=true|false (ALPHA \- default=false)
+HyperVContainer=true|false (ALPHA \- default=false)
+IPv6DualStack=true|false (ALPHA \- default=false)
+KubeletPodResources=true|false (BETA \- default=true)
+LocalStorageCapacityIsolation=true|false (BETA \- default=true)
+LocalStorageCapacityIsolationFSQuotaMonitoring=true|false (ALPHA \- default=false)
+MountContainers=true|false (ALPHA \- default=false)
+NodeLease=true|false (BETA \- default=true)
+NonPreemptingPriority=true|false (ALPHA \- default=false)
+PodOverhead=true|false (ALPHA \- default=false)
+PodShareProcessNamespace=true|false (BETA \- default=true)
+ProcMountType=true|false (ALPHA \- default=false)
+QOSReserved=true|false (ALPHA \- default=false)
+RemainingItemCount=true|false (ALPHA \- default=false)
+RequestManagement=true|false (ALPHA \- default=false)
+ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
+RotateKubeletClientCertificate=true|false (BETA \- default=true)
+RotateKubeletServerCertificate=true|false (BETA \- default=true)
+RunAsGroup=true|false (BETA \- default=true)
+RuntimeClass=true|false (BETA \- default=true)
+SCTPSupport=true|false (ALPHA \- default=false)
+ScheduleDaemonSetPods=true|false (BETA \- default=true)
+ServerSideApply=true|false (ALPHA \- default=false)
+ServiceLoadBalancerFinalizer=true|false (ALPHA \- default=false)
+ServiceNodeExclusion=true|false (ALPHA \- default=false)
+StorageVersionHash=true|false (BETA \- default=true)
+StreamingProxyRedirects=true|false (BETA \- default=true)
+SupportNodePidsLimit=true|false (BETA \- default=true)
+SupportPodPidsLimit=true|false (BETA \- default=true)
+Sysctls=true|false (BETA \- default=true)
+TTLAfterFinished=true|false (ALPHA \- default=false)
+TaintBasedEvictions=true|false (BETA \- default=true)
+TaintNodesByCondition=true|false (BETA \- default=true)
+TokenRequest=true|false (BETA \- default=true)
+TokenRequestProjection=true|false (BETA \- default=true)
+TopologyManager=true|false (ALPHA \- default=false)
+ValidateProxyRedirects=true|false (BETA \- default=true)
+VolumePVCDataSource=true|false (ALPHA \- default=false)
+VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
+VolumeSubpathEnvExpansion=true|false (BETA \- default=true)
+WatchBookmark=true|false (BETA \- default=true)
+WinDSR=true|false (ALPHA \- default=false)
+WinOverlay=true|false (ALPHA \- default=false)
+WindowsGMSA=true|false (ALPHA \- default=false)
+WindowsRunAsUserName=true|false (ALPHA \- default=false)
+
+.PP
+\fB\-h\fP, \fB\-\-help\fP=false
+    help for cloud\-controller\-manager
+
+.PP
+\fB\-\-http2\-max\-streams\-per\-connection\fP=0
+    The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
+
+.PP
+\fB\-\-kube\-api\-burst\fP=30
+    Burst to use while talking with kubernetes apiserver.
+
+.PP
+\fB\-\-kube\-api\-content\-type\fP="application/vnd.kubernetes.protobuf"
+    Content type of requests sent to apiserver.
+
+.PP
+\fB\-\-kube\-api\-qps\fP=20
+    QPS to use while talking with kubernetes apiserver.
+
+.PP
+\fB\-\-kubeconfig\fP=""
+    Path to kubeconfig file with authorization and master location information.
+
+.PP
+\fB\-\-leader\-elect\fP=true
+    Start a leader election client and gain leadership before executing the main loop. Enable this when running replicated components for high availability.
+
+.PP
+\fB\-\-leader\-elect\-lease\-duration\fP=15s
+    The duration that non\-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled.
+
+.PP
+\fB\-\-leader\-elect\-renew\-deadline\fP=10s
+    The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled.
+
+.PP
+\fB\-\-leader\-elect\-resource\-lock\fP="endpoints"
+    The type of resource object that is used for locking during leader election. Supported options are \fB\fCendpoints\fR (default) and \fB\fCconfigmaps\fR\&.
+
+.PP
+\fB\-\-leader\-elect\-retry\-period\fP=2s
+    The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.
+
+.PP
+\fB\-\-log\-backtrace\-at\fP=:0
+    when logging hits line file:N, emit a stack trace
+
+.PP
+\fB\-\-log\-dir\fP=""
+    If non\-empty, write log files in this directory
+
+.PP
+\fB\-\-log\-file\fP=""
+    If non\-empty, use this log file
+
+.PP
+\fB\-\-log\-file\-max\-size\fP=1800
+    Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-logtostderr\fP=true
+    log to standard error instead of files
+
+.PP
+\fB\-\-master\fP=""
+    The address of the Kubernetes API server (overrides any value in kubeconfig).
+
+.PP
+\fB\-\-min\-resync\-period\fP=12h0m0s
+    The resync period in reflectors will be random between MinResyncPeriod and 2*MinResyncPeriod.
+
+.PP
+\fB\-\-node\-monitor\-period\fP=5s
+    The period for syncing NodeStatus in NodeController.
+
+.PP
+\fB\-\-node\-status\-update\-frequency\fP=5m0s
+    Specifies how often the controller updates nodes' status.
+
+.PP
+\fB\-\-node\-sync\-period\fP=0s
+    This flag is deprecated and will be removed in future releases. See node\-monitor\-period for Node health checking or route\-reconciliation\-period for cloud provider's route configuration settings.
+
+.PP
+\fB\-\-port\fP=0
+    The port on which to serve unsecured, unauthenticated access. Set to 0 to disable.
+
+.PP
+\fB\-\-profiling\fP=false
+    Enable profiling via web interface host:port/debug/pprof/
+
+.PP
+\fB\-\-requestheader\-allowed\-names\fP=[]
+    List of client certificate common names to allow to provide usernames in headers specified by \-\-requestheader\-username\-headers. If empty, any client certificate validated by the authorities in \-\-requestheader\-client\-ca\-file is allowed.
+
+.PP
+\fB\-\-requestheader\-client\-ca\-file\fP=""
+    Root certificate bundle to use to verify client certificates on incoming requests before trusting usernames in headers specified by \-\-requestheader\-username\-headers. WARNING: generally do not depend on authorization being already done for incoming requests.
+
+.PP
+\fB\-\-requestheader\-extra\-headers\-prefix\fP=[x\-remote\-extra\-]
+    List of request header prefixes to inspect. X\-Remote\-Extra\- is suggested.
+
+.PP
+\fB\-\-requestheader\-group\-headers\fP=[x\-remote\-group]
+    List of request headers to inspect for groups. X\-Remote\-Group is suggested.
+
+.PP
+\fB\-\-requestheader\-username\-headers\fP=[x\-remote\-user]
+    List of request headers to inspect for usernames. X\-Remote\-User is common.
+
+.PP
+\fB\-\-route\-reconciliation\-period\fP=10s
+    The period for reconciling routes created for Nodes by cloud provider.
+
+.PP
+\fB\-\-secure\-port\fP=10258
+    The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
+
+.PP
+\fB\-\-skip\-headers\fP=false
+    If true, avoid header prefixes in the log messages
+
+.PP
+\fB\-\-skip\-log\-headers\fP=false
+    If true, avoid headers when opening log files
+
+.PP
+\fB\-\-stderrthreshold\fP=2
+    logs at or above this threshold go to stderr
+
+.PP
+\fB\-\-tls\-cert\-file\fP=""
+    File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are not provided, a self\-signed certificate and key are generated for the public address and saved to the directory specified by \-\-cert\-dir.
+
+.PP
+\fB\-\-tls\-cipher\-suites\fP=[]
+    Comma\-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_ECDSA\_WITH\_RC4\_128\_SHA,TLS\_ECDHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_RSA\_WITH\_RC4\_128\_SHA,TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_RSA\_WITH\_RC4\_128\_SHA
+
+.PP
+\fB\-\-tls\-min\-version\fP=""
+    Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12, VersionTLS13
+
+.PP
+\fB\-\-tls\-private\-key\-file\fP=""
+    File containing the default x509 private key matching \-\-tls\-cert\-file.
+
+.PP
+\fB\-\-tls\-sni\-cert\-key\fP=[]
+    A pair of x509 certificate and private key file paths, optionally suffixed with a list of domain patterns which are fully qualified domain names, possibly with prefixed wildcard segments. If no domain patterns are provided, the names of the certificate are extracted. Non\-wildcard matches trump over wildcard matches, explicit domain patterns trump over extracted names. For multiple key/certificate pairs, use the \-\-tls\-sni\-cert\-key multiple times. Examples: "example.crt,example.key" or "foo.crt,foo.key:*.foo.com,foo.com".
+
+.PP
+\fB\-\-use\-service\-account\-credentials\fP=false
+    If true, use individual service account credentials for each controller.
+
+.PP
+\fB\-v\fP, \fB\-\-v\fP=0
+    number for the log level verbosity
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+.PP
+\fB\-\-vmodule\fP=
+    comma\-separated list of pattern=N settings for file\-filtered logging
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

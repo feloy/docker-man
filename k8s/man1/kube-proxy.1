@@ -1,0 +1,274 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kube\-proxy \-
+
+
+.SH SYNOPSIS
+.PP
+\fBkube\-proxy\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+The Kubernetes network proxy runs on each node. This
+reflects services as defined in the Kubernetes API on each node and can do simple
+TCP, UDP, and SCTP stream forwarding or round robin TCP, UDP, and SCTP forwarding across a set of backends.
+Service cluster IPs and ports are currently found through Docker\-links\-compatible
+environment variables specifying ports opened by the service proxy. There is an optional
+addon that provides cluster DNS for these cluster IPs. The user must create a service
+with the apiserver API to configure the proxy.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-bind\-address\fP=0.0.0.0
+    The IP address for the proxy server to serve on (set to \fB\fC0.0.0.0\fR for all IPv4 interfaces and \fB\fC::\fR for all IPv6 interfaces)
+
+.PP
+\fB\-\-cleanup\fP=false
+    If true cleanup iptables and ipvs rules and exit.
+
+.PP
+\fB\-\-cleanup\-ipvs\fP=true
+    If true and \-\-cleanup is specified, kube\-proxy will also flush IPVS rules, in addition to normal cleanup.
+
+.PP
+\fB\-\-cluster\-cidr\fP=""
+    The CIDR range of pods in the cluster. When configured, traffic sent to a Service cluster IP from outside this range will be masqueraded and traffic sent from pods to an external LoadBalancer IP will be directed to the respective cluster IP instead
+
+.PP
+\fB\-\-config\fP=""
+    The path to the configuration file.
+
+.PP
+\fB\-\-config\-sync\-period\fP=15m0s
+    How often configuration from the apiserver is refreshed.  Must be greater than 0.
+
+.PP
+\fB\-\-conntrack\-max\-per\-core\fP=32768
+    Maximum number of NAT connections to track per CPU core (0 to leave the limit as\-is and ignore conntrack\-min).
+
+.PP
+\fB\-\-conntrack\-min\fP=131072
+    Minimum number of conntrack entries to allocate, regardless of conntrack\-max\-per\-core (set conntrack\-max\-per\-core=0 to leave the limit as\-is).
+
+.PP
+\fB\-\-conntrack\-tcp\-timeout\-close\-wait\fP=1h0m0s
+    NAT timeout for TCP connections in the CLOSE\_WAIT state
+
+.PP
+\fB\-\-conntrack\-tcp\-timeout\-established\fP=24h0m0s
+    Idle timeout for established TCP connections (0 to leave as\-is)
+
+.PP
+\fB\-\-feature\-gates\fP=
+    A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+APIListChunking=true|false (BETA \- default=true)
+APIResponseCompression=true|false (BETA \- default=true)
+AllAlpha=true|false (ALPHA \- default=false)
+AppArmor=true|false (BETA \- default=true)
+AttachVolumeLimit=true|false (BETA \- default=true)
+BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
+BlockVolume=true|false (BETA \- default=true)
+BoundServiceAccountTokenVolume=true|false (ALPHA \- default=false)
+CPUManager=true|false (BETA \- default=true)
+CRIContainerLogRotation=true|false (BETA \- default=true)
+CSIBlockVolume=true|false (BETA \- default=true)
+CSIDriverRegistry=true|false (BETA \- default=true)
+CSIInlineVolume=true|false (ALPHA \- default=false)
+CSIMigration=true|false (ALPHA \- default=false)
+CSIMigrationAWS=true|false (ALPHA \- default=false)
+CSIMigrationAzureDisk=true|false (ALPHA \- default=false)
+CSIMigrationAzureFile=true|false (ALPHA \- default=false)
+CSIMigrationGCE=true|false (ALPHA \- default=false)
+CSIMigrationOpenStack=true|false (ALPHA \- default=false)
+CSINodeInfo=true|false (BETA \- default=true)
+CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
+CustomResourceDefaulting=true|false (ALPHA \- default=false)
+CustomResourcePublishOpenAPI=true|false (BETA \- default=true)
+CustomResourceSubresources=true|false (BETA \- default=true)
+CustomResourceValidation=true|false (BETA \- default=true)
+CustomResourceWebhookConversion=true|false (BETA \- default=true)
+DebugContainers=true|false (ALPHA \- default=false)
+DevicePlugins=true|false (BETA \- default=true)
+DryRun=true|false (BETA \- default=true)
+DynamicAuditing=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=true)
+EvenPodsSpread=true|false (ALPHA \- default=false)
+ExpandCSIVolumes=true|false (ALPHA \- default=false)
+ExpandInUsePersistentVolumes=true|false (BETA \- default=true)
+ExpandPersistentVolumes=true|false (BETA \- default=true)
+ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
+ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
+HPAScaleToZero=true|false (ALPHA \- default=false)
+HyperVContainer=true|false (ALPHA \- default=false)
+IPv6DualStack=true|false (ALPHA \- default=false)
+KubeletPodResources=true|false (BETA \- default=true)
+LocalStorageCapacityIsolation=true|false (BETA \- default=true)
+LocalStorageCapacityIsolationFSQuotaMonitoring=true|false (ALPHA \- default=false)
+MountContainers=true|false (ALPHA \- default=false)
+NodeLease=true|false (BETA \- default=true)
+NonPreemptingPriority=true|false (ALPHA \- default=false)
+PodOverhead=true|false (ALPHA \- default=false)
+PodShareProcessNamespace=true|false (BETA \- default=true)
+ProcMountType=true|false (ALPHA \- default=false)
+QOSReserved=true|false (ALPHA \- default=false)
+RemainingItemCount=true|false (ALPHA \- default=false)
+RequestManagement=true|false (ALPHA \- default=false)
+ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
+RotateKubeletClientCertificate=true|false (BETA \- default=true)
+RotateKubeletServerCertificate=true|false (BETA \- default=true)
+RunAsGroup=true|false (BETA \- default=true)
+RuntimeClass=true|false (BETA \- default=true)
+SCTPSupport=true|false (ALPHA \- default=false)
+ScheduleDaemonSetPods=true|false (BETA \- default=true)
+ServerSideApply=true|false (ALPHA \- default=false)
+ServiceLoadBalancerFinalizer=true|false (ALPHA \- default=false)
+ServiceNodeExclusion=true|false (ALPHA \- default=false)
+StorageVersionHash=true|false (BETA \- default=true)
+StreamingProxyRedirects=true|false (BETA \- default=true)
+SupportNodePidsLimit=true|false (BETA \- default=true)
+SupportPodPidsLimit=true|false (BETA \- default=true)
+Sysctls=true|false (BETA \- default=true)
+TTLAfterFinished=true|false (ALPHA \- default=false)
+TaintBasedEvictions=true|false (BETA \- default=true)
+TaintNodesByCondition=true|false (BETA \- default=true)
+TokenRequest=true|false (BETA \- default=true)
+TokenRequestProjection=true|false (BETA \- default=true)
+TopologyManager=true|false (ALPHA \- default=false)
+ValidateProxyRedirects=true|false (BETA \- default=true)
+VolumePVCDataSource=true|false (ALPHA \- default=false)
+VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
+VolumeSubpathEnvExpansion=true|false (BETA \- default=true)
+WatchBookmark=true|false (BETA \- default=true)
+WinDSR=true|false (ALPHA \- default=false)
+WinOverlay=true|false (ALPHA \- default=false)
+WindowsGMSA=true|false (ALPHA \- default=false)
+WindowsRunAsUserName=true|false (ALPHA \- default=false)
+
+.PP
+\fB\-\-healthz\-bind\-address\fP=0.0.0.0:10256
+    The IP address for the health check server to serve on (set to \fB\fC0.0.0.0\fR for all IPv4 interfaces and \fB\fC::\fR for all IPv6 interfaces)
+
+.PP
+\fB\-\-healthz\-port\fP=10256
+    The port to bind the health check server. Use 0 to disable.
+
+.PP
+\fB\-\-hostname\-override\fP=""
+    If non\-empty, will use this string as identification instead of the actual hostname.
+
+.PP
+\fB\-\-iptables\-masquerade\-bit\fP=14
+    If using the pure iptables proxy, the bit of the fwmark space to mark packets requiring SNAT with.  Must be within the range [0, 31].
+
+.PP
+\fB\-\-iptables\-min\-sync\-period\fP=0s
+    The minimum interval of how often the iptables rules can be refreshed as endpoints and services change (e.g. '5s', '1m', '2h22m').
+
+.PP
+\fB\-\-iptables\-sync\-period\fP=30s
+    The maximum interval of how often iptables rules are refreshed (e.g. '5s', '1m', '2h22m').  Must be greater than 0.
+
+.PP
+\fB\-\-ipvs\-exclude\-cidrs\fP=[]
+    A comma\-separated list of CIDR's which the ipvs proxier should not touch when cleaning up IPVS rules.
+
+.PP
+\fB\-\-ipvs\-min\-sync\-period\fP=0s
+    The minimum interval of how often the ipvs rules can be refreshed as endpoints and services change (e.g. '5s', '1m', '2h22m').
+
+.PP
+\fB\-\-ipvs\-scheduler\fP=""
+    The ipvs scheduler type when proxy mode is ipvs
+
+.PP
+\fB\-\-ipvs\-strict\-arp\fP=false
+    Enable strict ARP by setting arp\_ignore to 1 and arp\_announce to 2
+
+.PP
+\fB\-\-ipvs\-sync\-period\fP=30s
+    The maximum interval of how often ipvs rules are refreshed (e.g. '5s', '1m', '2h22m').  Must be greater than 0.
+
+.PP
+\fB\-\-kube\-api\-burst\fP=10
+    Burst to use while talking with kubernetes apiserver
+
+.PP
+\fB\-\-kube\-api\-content\-type\fP="application/vnd.kubernetes.protobuf"
+    Content type of requests sent to apiserver.
+
+.PP
+\fB\-\-kube\-api\-qps\fP=5
+    QPS to use while talking with kubernetes apiserver
+
+.PP
+\fB\-\-kubeconfig\fP=""
+    Path to kubeconfig file with authorization information (the master location is set by the master flag).
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-masquerade\-all\fP=false
+    If using the pure iptables proxy, SNAT all traffic sent via Service cluster IPs (this not commonly needed)
+
+.PP
+\fB\-\-master\fP=""
+    The address of the Kubernetes API server (overrides any value in kubeconfig)
+
+.PP
+\fB\-\-metrics\-bind\-address\fP=127.0.0.1:10249
+    The IP address for the metrics server to serve on (set to \fB\fC0.0.0.0\fR for all IPv4 interfaces and \fB\fC::\fR for all IPv6 interfaces)
+
+.PP
+\fB\-\-metrics\-port\fP=10249
+    The port to bind the metrics server. Use 0 to disable.
+
+.PP
+\fB\-\-nodeport\-addresses\fP=[]
+    A string slice of values which specify the addresses to use for NodePorts. Values may be valid IP blocks (e.g. 1.2.3.0/24, 1.2.3.4/32). The default empty string slice ([]) means to use all local addresses.
+
+.PP
+\fB\-\-oom\-score\-adj\fP=\-999
+    The oom\-score\-adj value for kube\-proxy process. Values must be within the range [\-1000, 1000]
+
+.PP
+\fB\-\-profiling\fP=false
+    If true enables profiling via web interface on /debug/pprof handler.
+
+.PP
+\fB\-\-proxy\-mode\fP=
+    Which proxy mode to use: 'userspace' (older) or 'iptables' (faster) or 'ipvs'. If blank, use the best\-available proxy (currently iptables).  If the iptables proxy is selected, regardless of how, but the system's kernel or iptables versions are insufficient, this always falls back to the userspace proxy.
+
+.PP
+\fB\-\-proxy\-port\-range\fP=
+    Range of host ports (beginPort\-endPort, single port or beginPort+offset, inclusive) that may be consumed in order to proxy service traffic. If (unspecified, 0, or 0\-0) then ports will be randomly chosen.
+
+.PP
+\fB\-\-udp\-timeout\fP=250ms
+    How long an idle UDP connection will be kept open (e.g. '250ms', '2s').  Must be greater than 0. Only applicable for proxy\-mode=userspace
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+.PP
+\fB\-\-write\-config\-to\fP=""
+    If set, write the default configuration values to this file and exit.
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

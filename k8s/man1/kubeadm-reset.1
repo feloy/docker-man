@@ -1,0 +1,87 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm reset \- Run this to revert any changes made to this host by 'kubeadm init' or 'kubeadm join'
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm reset\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Run this to revert any changes made to this host by 'kubeadm init' or 'kubeadm join'
+
+.PP
+The "reset" command executes the following phases:
+
+.PP
+.RS
+
+.nf
+preflight              Run reset pre\-flight checks
+update\-cluster\-status  Remove this node from the ClusterStatus object.
+remove\-etcd\-member     Remove a local etcd member.
+cleanup\-node           Run cleanup node.
+
+.fi
+.RE
+
+
+.SH OPTIONS
+.PP
+\fB\-\-cert\-dir\fP="/etc/kubernetes/pki"
+    The path to the directory where the certificates are stored. If specified, clean this directory.
+
+.PP
+\fB\-\-cri\-socket\fP=""
+    Path to the CRI socket to connect. If empty kubeadm will try to auto\-detect this value; use this option only if you have more than one CRI installed or if you have non\-standard CRI socket.
+
+.PP
+\fB\-f\fP, \fB\-\-force\fP=false
+    Reset the node without prompting for confirmation.
+
+.PP
+\fB\-\-ignore\-preflight\-errors\fP=[]
+    A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-skip\-phases\fP=[]
+    List of phases to be skipped
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm(1)\fP, \fBkubeadm\-reset\-phase(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

@@ -1,0 +1,86 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm \- kubeadm: easily bootstrap a secure Kubernetes cluster
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+.RS
+
+.nf
+┌──────────────────────────────────────────────────────────┐
+│ KUBEADM                                                  │
+│ Easily bootstrap a secure Kubernetes cluster             │
+│                                                          │
+│ Please give us feedback at:                              │
+│ https://github.com/kubernetes/kubeadm/issues             │
+└──────────────────────────────────────────────────────────┘
+
+.fi
+.RE
+
+.PP
+Example usage:
+
+.PP
+.RS
+
+.nf
+Create a two\-machine cluster with one control\-plane node
+(which controls the cluster), and one worker node
+(where your workloads, like Pods and Deployments run).
+
+┌──────────────────────────────────────────────────────────┐
+│ On the first machine:                                    │
+├──────────────────────────────────────────────────────────┤
+│ control\-plane# kubeadm init                              │
+└──────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────┐
+│ On the second machine:                                   │
+├──────────────────────────────────────────────────────────┤
+│ worker# kubeadm join <arguments\-returned\-from\-init>      │
+└──────────────────────────────────────────────────────────┘
+
+You can then repeat the second step on as many other machines as you like.
+
+.fi
+.RE
+
+
+.SH OPTIONS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-alpha(1)\fP, \fBkubeadm\-completion(1)\fP, \fBkubeadm\-config(1)\fP, \fBkubeadm\-init(1)\fP, \fBkubeadm\-join(1)\fP, \fBkubeadm\-reset(1)\fP, \fBkubeadm\-token(1)\fP, \fBkubeadm\-upgrade(1)\fP, \fBkubeadm\-version(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

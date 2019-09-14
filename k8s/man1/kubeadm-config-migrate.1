@@ -1,0 +1,73 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm config migrate \- Read an older version of the kubeadm configuration API types from a file, and output the similar config object for the newer version
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm config migrate\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+This command lets you convert configuration objects of older versions to the latest supported version,
+locally in the CLI tool without ever touching anything in the cluster.
+In this version of kubeadm, the following API versions are supported:
+\- kubeadm.k8s.io/v1beta2
+
+.PP
+Further, kubeadm can only write out config of version "kubeadm.k8s.io/v1beta2", but read both types.
+So regardless of what version you pass to the \-\-old\-config parameter here, the API object will be
+read, deserialized, defaulted, converted, validated, and re\-serialized when written to stdout or
+\-\-new\-config if specified.
+
+.PP
+In other words, the output of this command is what kubeadm actually would read internally if you
+submitted this file to "kubeadm init"
+
+
+.SH OPTIONS
+.PP
+\fB\-\-new\-config\fP=""
+    Path to the resulting equivalent kubeadm config file using the new API version. Optional, if not specified output will be sent to STDOUT.
+
+.PP
+\fB\-\-old\-config\fP=""
+    Path to the kubeadm config file that is using an old API version and should be converted. This flag is mandatory.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-config(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

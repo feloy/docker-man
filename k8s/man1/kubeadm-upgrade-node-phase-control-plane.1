@@ -1,0 +1,64 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm upgrade node phase control\-plane \- Upgrade the control plane instance deployed on this node, if any
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm upgrade node phase control\-plane\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Upgrade the control plane instance deployed on this node, if any
+
+
+.SH OPTIONS
+.PP
+\fB\-\-certificate\-renewal\fP=false
+    Perform the renewal of certificates used by component changed during upgrades.
+
+.PP
+\fB\-\-dry\-run\fP=false
+    Do not change any state, just output the actions that would be performed.
+
+.PP
+\fB\-\-etcd\-upgrade\fP=false
+    Perform the upgrade of etcd.
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-upgrade\-node\-phase(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

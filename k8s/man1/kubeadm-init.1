@@ -1,0 +1,186 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm init \- Run this command in order to set up the Kubernetes control plane
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm init\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Run this command in order to set up the Kubernetes control plane
+
+.PP
+The "init" command executes the following phases:
+
+.PP
+.RS
+
+.nf
+preflight                  Run pre\-flight checks
+kubelet\-start              Write kubelet settings and (re)start the kubelet
+certs                      Certificate generation
+  /ca                        Generate the self\-signed Kubernetes CA to provision identities for other Kubernetes components
+  /apiserver                 Generate the certificate for serving the Kubernetes API
+  /apiserver\-kubelet\-client  Generate the certificate for the API server to connect to kubelet
+  /front\-proxy\-ca            Generate the self\-signed CA to provision identities for front proxy
+  /front\-proxy\-client        Generate the certificate for the front proxy client
+  /etcd\-ca                   Generate the self\-signed CA to provision identities for etcd
+  /etcd\-server               Generate the certificate for serving etcd
+  /etcd\-peer                 Generate the certificate for etcd nodes to communicate with each other
+  /etcd\-healthcheck\-client   Generate the certificate for liveness probes to healthcheck etcd
+  /apiserver\-etcd\-client     Generate the certificate the apiserver uses to access etcd
+  /sa                        Generate a private key for signing service account tokens along with its public key
+kubeconfig                 Generate all kubeconfig files necessary to establish the control plane and the admin kubeconfig file
+  /admin                     Generate a kubeconfig file for the admin to use and for kubeadm itself
+  /kubelet                   Generate a kubeconfig file for the kubelet to use *only* for cluster bootstrapping purposes
+  /controller\-manager        Generate a kubeconfig file for the controller manager to use
+  /scheduler                 Generate a kubeconfig file for the scheduler to use
+control\-plane              Generate all static Pod manifest files necessary to establish the control plane
+  /apiserver                 Generates the kube\-apiserver static Pod manifest
+  /controller\-manager        Generates the kube\-controller\-manager static Pod manifest
+  /scheduler                 Generates the kube\-scheduler static Pod manifest
+etcd                       Generate static Pod manifest file for local etcd
+  /local                     Generate the static Pod manifest file for a local, single\-node local etcd instance
+upload\-config              Upload the kubeadm and kubelet configuration to a ConfigMap
+  /kubeadm                   Upload the kubeadm ClusterConfiguration to a ConfigMap
+  /kubelet                   Upload the kubelet component config to a ConfigMap
+upload\-certs               Upload certificates to kubeadm\-certs
+mark\-control\-plane         Mark a node as a control\-plane
+bootstrap\-token            Generates bootstrap tokens used to join a node to a cluster
+addon                      Install required addons for passing Conformance tests
+  /coredns                   Install the CoreDNS addon to a Kubernetes cluster
+  /kube\-proxy                Install the kube\-proxy addon to a Kubernetes cluster
+
+.fi
+.RE
+
+
+.SH OPTIONS
+.PP
+\fB\-\-apiserver\-advertise\-address\fP=""
+    The IP address the API Server will advertise it's listening on. If not set the default network interface will be used.
+
+.PP
+\fB\-\-apiserver\-bind\-port\fP=6443
+    Port for the API Server to bind to.
+
+.PP
+\fB\-\-apiserver\-cert\-extra\-sans\fP=[]
+    Optional extra Subject Alternative Names (SANs) to use for the API Server serving certificate. Can be both IP addresses and DNS names.
+
+.PP
+\fB\-\-cert\-dir\fP="/etc/kubernetes/pki"
+    The path where to save and store the certificates.
+
+.PP
+\fB\-\-certificate\-key\fP=""
+    Key used to encrypt the control\-plane certificates in the kubeadm\-certs Secret.
+
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-control\-plane\-endpoint\fP=""
+    Specify a stable IP address or DNS name for the control plane.
+
+.PP
+\fB\-\-cri\-socket\fP=""
+    Path to the CRI socket to connect. If empty kubeadm will try to auto\-detect this value; use this option only if you have more than one CRI installed or if you have non\-standard CRI socket.
+
+.PP
+\fB\-\-dry\-run\fP=false
+    Don't apply any changes; just output what would be done.
+
+.PP
+\fB\-\-feature\-gates\fP=""
+    A set of key=value pairs that describe feature gates for various features. Options are:
+IPv6DualStack=true|false (ALPHA \- default=false)
+
+.PP
+\fB\-\-ignore\-preflight\-errors\fP=[]
+    A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
+
+.PP
+\fB\-\-image\-repository\fP="k8s.gcr.io"
+    Choose a container registry to pull control plane images from
+
+.PP
+\fB\-\-kubernetes\-version\fP="stable\-1"
+    Choose a specific Kubernetes version for the control plane.
+
+.PP
+\fB\-\-node\-name\fP=""
+    Specify the node name.
+
+.PP
+\fB\-\-pod\-network\-cidr\fP=""
+    Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
+
+.PP
+\fB\-\-service\-cidr\fP="10.96.0.0/12"
+    Use alternative range of IP address for service VIPs.
+
+.PP
+\fB\-\-service\-dns\-domain\fP="cluster.local"
+    Use alternative domain for services, e.g. "myorg.internal".
+
+.PP
+\fB\-\-skip\-certificate\-key\-print\fP=false
+    Don't print the key used to encrypt the control\-plane certificates.
+
+.PP
+\fB\-\-skip\-phases\fP=[]
+    List of phases to be skipped
+
+.PP
+\fB\-\-skip\-token\-print\fP=false
+    Skip printing of the default bootstrap token generated by 'kubeadm init'.
+
+.PP
+\fB\-\-token\fP=""
+    The token to use for establishing bidirectional trust between nodes and control\-plane nodes. The format is [a\-z0\-9]{6}\&.[a\-z0\-9]{16} \- e.g. abcdef.0123456789abcdef
+
+.PP
+\fB\-\-token\-ttl\fP=24h0m0s
+    The duration before the token is automatically deleted (e.g. 1s, 2m, 3h). If set to '0', the token will never expire
+
+.PP
+\fB\-\-upload\-certs\fP=false
+    Upload control\-plane certificates to the kubeadm\-certs Secret.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm(1)\fP, \fBkubeadm\-init\-phase(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

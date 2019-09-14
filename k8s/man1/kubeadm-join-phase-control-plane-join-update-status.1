@@ -1,0 +1,64 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm join phase control\-plane\-join update\-status \- Register the new control\-plane node into the ClusterStatus maintained in the kubeadm\-config ConfigMap
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm join phase control\-plane\-join update\-status\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Register the new control\-plane node into the ClusterStatus maintained in the kubeadm\-config ConfigMap
+
+
+.SH OPTIONS
+.PP
+\fB\-\-apiserver\-advertise\-address\fP=""
+    If the node should host a new control plane instance, the IP address the API Server will advertise it's listening on. If not set the default network interface will be used.
+
+.PP
+\fB\-\-config\fP=""
+    Path to kubeadm config file.
+
+.PP
+\fB\-\-control\-plane\fP=false
+    Create a new control plane instance on this node
+
+.PP
+\fB\-\-node\-name\fP=""
+    Specify the node name.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-join\-phase\-control\-plane\-join(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

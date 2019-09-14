@@ -1,0 +1,609 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kube\-controller\-manager \-
+
+
+.SH SYNOPSIS
+.PP
+\fBkube\-controller\-manager\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+The Kubernetes controller manager is a daemon that embeds
+the core control loops shipped with Kubernetes. In applications of robotics and
+automation, a control loop is a non\-terminating loop that regulates the state of
+the system. In Kubernetes, a controller is a control loop that watches the shared
+state of the cluster through the apiserver and makes changes attempting to move the
+current state towards the desired state. Examples of controllers that ship with
+Kubernetes today are the replication controller, endpoints controller, namespace
+controller, and serviceaccounts controller.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-address\fP=0.0.0.0
+    The IP address on which to serve the insecure \-\-port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
+
+.PP
+\fB\-\-allocate\-node\-cidrs\fP=false
+    Should CIDRs for Pods be allocated and set on the cloud provider.
+
+.PP
+\fB\-\-allow\-untagged\-cloud\fP=false
+    Allow the cluster to run without the cluster\-id on cloud instances. This is a legacy mode of operation and a cluster\-id will be required in the future.
+
+.PP
+\fB\-\-alsologtostderr\fP=false
+    log to standard error as well as files
+
+.PP
+\fB\-\-attach\-detach\-reconcile\-sync\-period\fP=1m0s
+    The reconciler sync wait time between volume attach detach. This duration must be larger than one second, and increasing this value from the default may allow for volumes to be mismatched with pods.
+
+.PP
+\fB\-\-authentication\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create tokenaccessreviews.authentication.k8s.io. This is optional. If empty, all token requests are considered to be anonymous and no client CA is looked up in the cluster.
+
+.PP
+\fB\-\-authentication\-skip\-lookup\fP=false
+    If false, the authentication\-kubeconfig will be used to lookup missing authentication configuration from the cluster.
+
+.PP
+\fB\-\-authentication\-token\-webhook\-cache\-ttl\fP=10s
+    The duration to cache responses from the webhook token authenticator.
+
+.PP
+\fB\-\-authentication\-tolerate\-lookup\-failure\fP=false
+    If true, failures to look up missing authentication configuration from the cluster are not considered fatal. Note that this can result in authentication that treats all requests as anonymous.
+
+.PP
+\fB\-\-authorization\-always\-allow\-paths\fP=[/healthz]
+    A list of HTTP paths to skip during authorization, i.e. these are authorized without contacting the 'core' kubernetes server.
+
+.PP
+\fB\-\-authorization\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create subjectaccessreviews.authorization.k8s.io. This is optional. If empty, all requests not skipped by authorization are forbidden.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-authorized\-ttl\fP=10s
+    The duration to cache 'authorized' responses from the webhook authorizer.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-unauthorized\-ttl\fP=10s
+    The duration to cache 'unauthorized' responses from the webhook authorizer.
+
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-bind\-address\fP=0.0.0.0
+    The IP address on which to listen for the \-\-secure\-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank, all interfaces will be used (0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
+
+.PP
+\fB\-\-cert\-dir\fP=""
+    The directory where the TLS certs are located. If \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are provided, this flag will be ignored.
+
+.PP
+\fB\-\-cidr\-allocator\-type\fP="RangeAllocator"
+    Type of CIDR allocator to use
+
+.PP
+\fB\-\-client\-ca\-file\fP=""
+    If set, any request presenting a client certificate signed by one of the authorities in the client\-ca\-file is authenticated with an identity corresponding to the CommonName of the client certificate.
+
+.PP
+\fB\-\-cloud\-config\fP=""
+    The path to the cloud provider configuration file. Empty string for no configuration file.
+
+.PP
+\fB\-\-cloud\-provider\fP=""
+    The provider for cloud services. Empty string for no provider.
+
+.PP
+\fB\-\-cloud\-provider\-gce\-lb\-src\-cidrs\fP=130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16
+    CIDRs opened in GCE firewall for LB traffic proxy \& health checks
+
+.PP
+\fB\-\-cluster\-cidr\fP=""
+    CIDR Range for Pods in cluster. Requires \-\-allocate\-node\-cidrs to be true
+
+.PP
+\fB\-\-cluster\-name\fP="kubernetes"
+    The instance prefix for the cluster.
+
+.PP
+\fB\-\-cluster\-signing\-cert\-file\fP="/etc/kubernetes/ca/ca.pem"
+    Filename containing a PEM\-encoded X509 CA certificate used to issue cluster\-scoped certificates
+
+.PP
+\fB\-\-cluster\-signing\-key\-file\fP="/etc/kubernetes/ca/ca.key"
+    Filename containing a PEM\-encoded RSA or ECDSA private key used to sign cluster\-scoped certificates
+
+.PP
+\fB\-\-concurrent\-deployment\-syncs\fP=5
+    The number of deployment objects that are allowed to sync concurrently. Larger number = more responsive deployments, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-endpoint\-syncs\fP=5
+    The number of endpoint syncing operations that will be done concurrently. Larger number = faster endpoint updating, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-gc\-syncs\fP=20
+    The number of garbage collector workers that are allowed to sync concurrently.
+
+.PP
+\fB\-\-concurrent\-namespace\-syncs\fP=10
+    The number of namespace objects that are allowed to sync concurrently. Larger number = more responsive namespace termination, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-replicaset\-syncs\fP=5
+    The number of replica sets that are allowed to sync concurrently. Larger number = more responsive replica management, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-resource\-quota\-syncs\fP=5
+    The number of resource quotas that are allowed to sync concurrently. Larger number = more responsive quota management, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-service\-syncs\fP=1
+    The number of services that are allowed to sync concurrently. Larger number = more responsive service management, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-serviceaccount\-token\-syncs\fP=5
+    The number of service account token objects that are allowed to sync concurrently. Larger number = more responsive token generation, but more CPU (and network) load
+
+.PP
+\fB\-\-concurrent\-ttl\-after\-finished\-syncs\fP=5
+    The number of TTL\-after\-finished controller workers that are allowed to sync concurrently.
+
+.PP
+\fB\-\-concurrent\_rc\_syncs\fP=5
+    The number of replication controllers that are allowed to sync concurrently. Larger number = more responsive replica management, but more CPU (and network) load
+
+.PP
+\fB\-\-configure\-cloud\-routes\fP=true
+    Should CIDRs allocated by allocate\-node\-cidrs be configured on the cloud provider.
+
+.PP
+\fB\-\-contention\-profiling\fP=false
+    Enable lock contention profiling, if profiling is enabled
+
+.PP
+\fB\-\-controller\-start\-interval\fP=0s
+    Interval between starting controller managers.
+
+.PP
+\fB\-\-controllers\fP=[\fI]
+    A list of controllers to enable. '\fP\&' enables all on\-\&by\-\&default controllers, 'foo' enables the controller named 'foo', '\-\&foo' disables the controller named 'foo'.
+All controllers: attachdetach, bootstrapsigner, cloud\-node\-lifecycle, clusterrole\-aggregation, cronjob, csrapproving, csrcleaner, csrsigning, daemonset, deployment, disruption, endpoint, garbagecollector, horizontalpodautoscaling, job, namespace, nodeipam, nodelifecycle, persistentvolume\-binder, persistentvolume\-expander, podgc, pv\-protection, pvc\-protection, replicaset, replicationcontroller, resourcequota, root\-ca\-cert\-publisher, route, service, serviceaccount, serviceaccount\-token, statefulset, tokencleaner, ttl, ttl\-after\-finished
+Disabled\-by\-default controllers: bootstrapsigner, tokencleaner
+
+.PP
+\fB\-\-deleting\-pods\-burst\fP=0
+    Number of nodes on which pods are bursty deleted in case of node failure. For more details look into RateLimiter.
+
+.PP
+\fB\-\-deleting\-pods\-qps\fP=0.1
+    Number of nodes per second on which pods are deleted in case of node failure.
+
+.PP
+\fB\-\-deployment\-controller\-sync\-period\fP=30s
+    Period for syncing the deployments.
+
+.PP
+\fB\-\-disable\-attach\-detach\-reconcile\-sync\fP=false
+    Disable volume attach detach reconciler sync. Disabling this may cause volumes to be mismatched with pods. Use wisely.
+
+.PP
+\fB\-\-enable\-dynamic\-provisioning\fP=true
+    Enable dynamic provisioning for environments that support it.
+
+.PP
+\fB\-\-enable\-garbage\-collector\fP=true
+    Enables the generic garbage collector. MUST be synced with the corresponding flag of the kube\-apiserver.
+
+.PP
+\fB\-\-enable\-hostpath\-provisioner\fP=false
+    Enable HostPath PV provisioning when running without a cloud provider. This allows testing and development of provisioning features.  HostPath provisioning is not supported in any way, won't work in a multi\-node cluster, and should not be used for anything other than testing or development.
+
+.PP
+\fB\-\-enable\-taint\-manager\fP=true
+    WARNING: Beta feature. If set to true enables NoExecute Taints and will evict all not\-tolerating Pod running on Nodes tainted with this kind of Taints.
+
+.PP
+\fB\-\-experimental\-cluster\-signing\-duration\fP=8760h0m0s
+    The length of duration signed certificates will be given.
+
+.PP
+\fB\-\-external\-cloud\-volume\-plugin\fP=""
+    The plugin to use when cloud provider is set to external. Can be empty, should only be set when cloud\-provider is external. Currently used to allow node and volume controllers to work for in tree cloud providers.
+
+.PP
+\fB\-\-feature\-gates\fP=
+    A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+APIListChunking=true|false (BETA \- default=true)
+APIResponseCompression=true|false (BETA \- default=true)
+AllAlpha=true|false (ALPHA \- default=false)
+AppArmor=true|false (BETA \- default=true)
+AttachVolumeLimit=true|false (BETA \- default=true)
+BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
+BlockVolume=true|false (BETA \- default=true)
+BoundServiceAccountTokenVolume=true|false (ALPHA \- default=false)
+CPUManager=true|false (BETA \- default=true)
+CRIContainerLogRotation=true|false (BETA \- default=true)
+CSIBlockVolume=true|false (BETA \- default=true)
+CSIDriverRegistry=true|false (BETA \- default=true)
+CSIInlineVolume=true|false (ALPHA \- default=false)
+CSIMigration=true|false (ALPHA \- default=false)
+CSIMigrationAWS=true|false (ALPHA \- default=false)
+CSIMigrationAzureDisk=true|false (ALPHA \- default=false)
+CSIMigrationAzureFile=true|false (ALPHA \- default=false)
+CSIMigrationGCE=true|false (ALPHA \- default=false)
+CSIMigrationOpenStack=true|false (ALPHA \- default=false)
+CSINodeInfo=true|false (BETA \- default=true)
+CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
+CustomResourceDefaulting=true|false (ALPHA \- default=false)
+CustomResourcePublishOpenAPI=true|false (BETA \- default=true)
+CustomResourceSubresources=true|false (BETA \- default=true)
+CustomResourceValidation=true|false (BETA \- default=true)
+CustomResourceWebhookConversion=true|false (BETA \- default=true)
+DebugContainers=true|false (ALPHA \- default=false)
+DevicePlugins=true|false (BETA \- default=true)
+DryRun=true|false (BETA \- default=true)
+DynamicAuditing=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=true)
+EvenPodsSpread=true|false (ALPHA \- default=false)
+ExpandCSIVolumes=true|false (ALPHA \- default=false)
+ExpandInUsePersistentVolumes=true|false (BETA \- default=true)
+ExpandPersistentVolumes=true|false (BETA \- default=true)
+ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
+ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
+HPAScaleToZero=true|false (ALPHA \- default=false)
+HyperVContainer=true|false (ALPHA \- default=false)
+IPv6DualStack=true|false (ALPHA \- default=false)
+KubeletPodResources=true|false (BETA \- default=true)
+LocalStorageCapacityIsolation=true|false (BETA \- default=true)
+LocalStorageCapacityIsolationFSQuotaMonitoring=true|false (ALPHA \- default=false)
+MountContainers=true|false (ALPHA \- default=false)
+NodeLease=true|false (BETA \- default=true)
+NonPreemptingPriority=true|false (ALPHA \- default=false)
+PodOverhead=true|false (ALPHA \- default=false)
+PodShareProcessNamespace=true|false (BETA \- default=true)
+ProcMountType=true|false (ALPHA \- default=false)
+QOSReserved=true|false (ALPHA \- default=false)
+RemainingItemCount=true|false (ALPHA \- default=false)
+RequestManagement=true|false (ALPHA \- default=false)
+ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
+RotateKubeletClientCertificate=true|false (BETA \- default=true)
+RotateKubeletServerCertificate=true|false (BETA \- default=true)
+RunAsGroup=true|false (BETA \- default=true)
+RuntimeClass=true|false (BETA \- default=true)
+SCTPSupport=true|false (ALPHA \- default=false)
+ScheduleDaemonSetPods=true|false (BETA \- default=true)
+ServerSideApply=true|false (ALPHA \- default=false)
+ServiceLoadBalancerFinalizer=true|false (ALPHA \- default=false)
+ServiceNodeExclusion=true|false (ALPHA \- default=false)
+StorageVersionHash=true|false (BETA \- default=true)
+StreamingProxyRedirects=true|false (BETA \- default=true)
+SupportNodePidsLimit=true|false (BETA \- default=true)
+SupportPodPidsLimit=true|false (BETA \- default=true)
+Sysctls=true|false (BETA \- default=true)
+TTLAfterFinished=true|false (ALPHA \- default=false)
+TaintBasedEvictions=true|false (BETA \- default=true)
+TaintNodesByCondition=true|false (BETA \- default=true)
+TokenRequest=true|false (BETA \- default=true)
+TokenRequestProjection=true|false (BETA \- default=true)
+TopologyManager=true|false (ALPHA \- default=false)
+ValidateProxyRedirects=true|false (BETA \- default=true)
+VolumePVCDataSource=true|false (ALPHA \- default=false)
+VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
+VolumeSubpathEnvExpansion=true|false (BETA \- default=true)
+WatchBookmark=true|false (BETA \- default=true)
+WinDSR=true|false (ALPHA \- default=false)
+WinOverlay=true|false (ALPHA \- default=false)
+WindowsGMSA=true|false (ALPHA \- default=false)
+WindowsRunAsUserName=true|false (ALPHA \- default=false)
+
+.PP
+\fB\-\-flex\-volume\-plugin\-dir\fP="/usr/libexec/kubernetes/kubelet\-plugins/volume/exec/"
+    Full path of the directory in which the flex volume plugin should search for additional third party volume plugins.
+
+.PP
+\fB\-h\fP, \fB\-\-help\fP=false
+    help for kube\-controller\-manager
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-cpu\-initialization\-period\fP=5m0s
+    The period after pod start when CPU samples might be skipped.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-downscale\-delay\fP=5m0s
+    The period since last downscale, before another downscale can be performed in horizontal pod autoscaler.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-downscale\-stabilization\fP=5m0s
+    The period for which autoscaler will look backwards and not scale down below any recommendation it made during that period.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-initial\-readiness\-delay\fP=30s
+    The period after pod start during which readiness changes will be treated as initial readiness.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-sync\-period\fP=15s
+    The period for syncing the number of pods in horizontal pod autoscaler.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-tolerance\fP=0.1
+    The minimum change (from 1.0) in the desired\-to\-actual metrics ratio for the horizontal pod autoscaler to consider scaling.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-upscale\-delay\fP=3m0s
+    The period since last upscale, before another upscale can be performed in horizontal pod autoscaler.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-use\-rest\-clients\fP=true
+    If set to true, causes the horizontal pod autoscaler controller to use REST clients through the kube\-aggregator, instead of using the legacy metrics client through the API server proxy.  This is required for custom metrics support in the horizontal pod autoscaler.
+
+.PP
+\fB\-\-http2\-max\-streams\-per\-connection\fP=0
+    The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
+
+.PP
+\fB\-\-kube\-api\-burst\fP=30
+    Burst to use while talking with kubernetes apiserver.
+
+.PP
+\fB\-\-kube\-api\-content\-type\fP="application/vnd.kubernetes.protobuf"
+    Content type of requests sent to apiserver.
+
+.PP
+\fB\-\-kube\-api\-qps\fP=20
+    QPS to use while talking with kubernetes apiserver.
+
+.PP
+\fB\-\-kubeconfig\fP=""
+    Path to kubeconfig file with authorization and master location information.
+
+.PP
+\fB\-\-large\-cluster\-size\-threshold\fP=50
+    Number of nodes from which NodeController treats the cluster as large for the eviction logic purposes. \-\-secondary\-node\-eviction\-rate is implicitly overridden to 0 for clusters this size or smaller.
+
+.PP
+\fB\-\-leader\-elect\fP=true
+    Start a leader election client and gain leadership before executing the main loop. Enable this when running replicated components for high availability.
+
+.PP
+\fB\-\-leader\-elect\-lease\-duration\fP=15s
+    The duration that non\-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled.
+
+.PP
+\fB\-\-leader\-elect\-renew\-deadline\fP=10s
+    The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled.
+
+.PP
+\fB\-\-leader\-elect\-resource\-lock\fP="endpoints"
+    The type of resource object that is used for locking during leader election. Supported options are \fB\fCendpoints\fR (default) and \fB\fCconfigmaps\fR\&.
+
+.PP
+\fB\-\-leader\-elect\-retry\-period\fP=2s
+    The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.
+
+.PP
+\fB\-\-log\-backtrace\-at\fP=:0
+    when logging hits line file:N, emit a stack trace
+
+.PP
+\fB\-\-log\-dir\fP=""
+    If non\-empty, write log files in this directory
+
+.PP
+\fB\-\-log\-file\fP=""
+    If non\-empty, use this log file
+
+.PP
+\fB\-\-log\-file\-max\-size\fP=1800
+    Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-logtostderr\fP=true
+    log to standard error instead of files
+
+.PP
+\fB\-\-master\fP=""
+    The address of the Kubernetes API server (overrides any value in kubeconfig).
+
+.PP
+\fB\-\-min\-resync\-period\fP=12h0m0s
+    The resync period in reflectors will be random between MinResyncPeriod and 2*MinResyncPeriod.
+
+.PP
+\fB\-\-namespace\-sync\-period\fP=5m0s
+    The period for syncing namespace life\-cycle updates
+
+.PP
+\fB\-\-node\-cidr\-mask\-size\fP=24
+    Mask size for node cidr in cluster.
+
+.PP
+\fB\-\-node\-eviction\-rate\fP=0.1
+    Number of nodes per second on which pods are deleted in case of node failure when a zone is healthy (see \-\-unhealthy\-zone\-threshold for definition of healthy/unhealthy). Zone refers to entire cluster in non\-multizone clusters.
+
+.PP
+\fB\-\-node\-monitor\-grace\-period\fP=40s
+    Amount of time which we allow running Node to be unresponsive before marking it unhealthy. Must be N times more than kubelet's nodeStatusUpdateFrequency, where N means number of retries allowed for kubelet to post node status.
+
+.PP
+\fB\-\-node\-monitor\-period\fP=5s
+    The period for syncing NodeStatus in NodeController.
+
+.PP
+\fB\-\-node\-startup\-grace\-period\fP=1m0s
+    Amount of time which we allow starting Node to be unresponsive before marking it unhealthy.
+
+.PP
+\fB\-\-node\-sync\-period\fP=0s
+    This flag is deprecated and will be removed in future releases. See node\-monitor\-period for Node health checking or route\-reconciliation\-period for cloud provider's route configuration settings.
+
+.PP
+\fB\-\-pod\-eviction\-timeout\fP=5m0s
+    The grace period for deleting pods on failed nodes.
+
+.PP
+\fB\-\-port\fP=10252
+    The port on which to serve unsecured, unauthenticated access. Set to 0 to disable.
+
+.PP
+\fB\-\-profiling\fP=false
+    Enable profiling via web interface host:port/debug/pprof/
+
+.PP
+\fB\-\-pv\-recycler\-increment\-timeout\-nfs\fP=30
+    the increment of time added per Gi to ActiveDeadlineSeconds for an NFS scrubber pod
+
+.PP
+\fB\-\-pv\-recycler\-minimum\-timeout\-hostpath\fP=60
+    The minimum ActiveDeadlineSeconds to use for a HostPath Recycler pod.  This is for development and testing only and will not work in a multi\-node cluster.
+
+.PP
+\fB\-\-pv\-recycler\-minimum\-timeout\-nfs\fP=300
+    The minimum ActiveDeadlineSeconds to use for an NFS Recycler pod
+
+.PP
+\fB\-\-pv\-recycler\-pod\-template\-filepath\-hostpath\fP=""
+    The file path to a pod definition used as a template for HostPath persistent volume recycling. This is for development and testing only and will not work in a multi\-node cluster.
+
+.PP
+\fB\-\-pv\-recycler\-pod\-template\-filepath\-nfs\fP=""
+    The file path to a pod definition used as a template for NFS persistent volume recycling
+
+.PP
+\fB\-\-pv\-recycler\-timeout\-increment\-hostpath\fP=30
+    the increment of time added per Gi to ActiveDeadlineSeconds for a HostPath scrubber pod.  This is for development and testing only and will not work in a multi\-node cluster.
+
+.PP
+\fB\-\-pvclaimbinder\-sync\-period\fP=15s
+    The period for syncing persistent volumes and persistent volume claims
+
+.PP
+\fB\-\-register\-retry\-count\fP=10
+    The number of retries for initial node registration.  Retry interval equals node\-sync\-period.
+
+.PP
+\fB\-\-requestheader\-allowed\-names\fP=[]
+    List of client certificate common names to allow to provide usernames in headers specified by \-\-requestheader\-username\-headers. If empty, any client certificate validated by the authorities in \-\-requestheader\-client\-ca\-file is allowed.
+
+.PP
+\fB\-\-requestheader\-client\-ca\-file\fP=""
+    Root certificate bundle to use to verify client certificates on incoming requests before trusting usernames in headers specified by \-\-requestheader\-username\-headers. WARNING: generally do not depend on authorization being already done for incoming requests.
+
+.PP
+\fB\-\-requestheader\-extra\-headers\-prefix\fP=[x\-remote\-extra\-]
+    List of request header prefixes to inspect. X\-Remote\-Extra\- is suggested.
+
+.PP
+\fB\-\-requestheader\-group\-headers\fP=[x\-remote\-group]
+    List of request headers to inspect for groups. X\-Remote\-Group is suggested.
+
+.PP
+\fB\-\-requestheader\-username\-headers\fP=[x\-remote\-user]
+    List of request headers to inspect for usernames. X\-Remote\-User is common.
+
+.PP
+\fB\-\-resource\-quota\-sync\-period\fP=5m0s
+    The period for syncing quota usage status in the system
+
+.PP
+\fB\-\-root\-ca\-file\fP=""
+    If set, this root certificate authority will be included in service account's token secret. This must be a valid PEM\-encoded CA bundle.
+
+.PP
+\fB\-\-route\-reconciliation\-period\fP=10s
+    The period for reconciling routes created for Nodes by cloud provider.
+
+.PP
+\fB\-\-secondary\-node\-eviction\-rate\fP=0.01
+    Number of nodes per second on which pods are deleted in case of node failure when a zone is unhealthy (see \-\-unhealthy\-zone\-threshold for definition of healthy/unhealthy). Zone refers to entire cluster in non\-multizone clusters. This value is implicitly overridden to 0 if the cluster size is smaller than \-\-large\-cluster\-size\-threshold.
+
+.PP
+\fB\-\-secure\-port\fP=10257
+    The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
+
+.PP
+\fB\-\-service\-account\-private\-key\-file\fP=""
+    Filename containing a PEM\-encoded private RSA or ECDSA key used to sign service account tokens.
+
+.PP
+\fB\-\-service\-cluster\-ip\-range\fP=""
+    CIDR Range for Services in cluster. Requires \-\-allocate\-node\-cidrs to be true
+
+.PP
+\fB\-\-skip\-headers\fP=false
+    If true, avoid header prefixes in the log messages
+
+.PP
+\fB\-\-skip\-log\-headers\fP=false
+    If true, avoid headers when opening log files
+
+.PP
+\fB\-\-stderrthreshold\fP=2
+    logs at or above this threshold go to stderr
+
+.PP
+\fB\-\-terminated\-pod\-gc\-threshold\fP=12500
+    Number of terminated pods that can exist before the terminated pod garbage collector starts deleting terminated pods. If <= 0, the terminated pod garbage collector is disabled.
+
+.PP
+\fB\-\-tls\-cert\-file\fP=""
+    File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are not provided, a self\-signed certificate and key are generated for the public address and saved to the directory specified by \-\-cert\-dir.
+
+.PP
+\fB\-\-tls\-cipher\-suites\fP=[]
+    Comma\-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_ECDSA\_WITH\_RC4\_128\_SHA,TLS\_ECDHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_RSA\_WITH\_RC4\_128\_SHA,TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_RSA\_WITH\_RC4\_128\_SHA
+
+.PP
+\fB\-\-tls\-min\-version\fP=""
+    Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12, VersionTLS13
+
+.PP
+\fB\-\-tls\-private\-key\-file\fP=""
+    File containing the default x509 private key matching \-\-tls\-cert\-file.
+
+.PP
+\fB\-\-tls\-sni\-cert\-key\fP=[]
+    A pair of x509 certificate and private key file paths, optionally suffixed with a list of domain patterns which are fully qualified domain names, possibly with prefixed wildcard segments. If no domain patterns are provided, the names of the certificate are extracted. Non\-wildcard matches trump over wildcard matches, explicit domain patterns trump over extracted names. For multiple key/certificate pairs, use the \-\-tls\-sni\-cert\-key multiple times. Examples: "example.crt,example.key" or "foo.crt,foo.key:*.foo.com,foo.com".
+
+.PP
+\fB\-\-unhealthy\-zone\-threshold\fP=0.55
+    Fraction of Nodes in a zone which needs to be not Ready (minimum 3) for zone to be treated as unhealthy.
+
+.PP
+\fB\-\-use\-service\-account\-credentials\fP=false
+    If true, use individual service account credentials for each controller.
+
+.PP
+\fB\-v\fP, \fB\-\-v\fP=0
+    number for the log level verbosity
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+.PP
+\fB\-\-vmodule\fP=
+    comma\-separated list of pattern=N settings for file\-filtered logging
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

@@ -1,0 +1,69 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm config images list \- Print a list of images kubeadm will use. The configuration file is used in case any images or image repositories are customized
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm config images list\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Print a list of images kubeadm will use. The configuration file is used in case any images or image repositories are customized
+
+
+.SH OPTIONS
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-feature\-gates\fP=""
+    A set of key=value pairs that describe feature gates for various features. Options are:
+IPv6DualStack=true|false (ALPHA \- default=false)
+
+.PP
+\fB\-\-image\-repository\fP="k8s.gcr.io"
+    Choose a container registry to pull control plane images from
+
+.PP
+\fB\-\-kubernetes\-version\fP="stable\-1"
+    Choose a specific Kubernetes version for the control plane.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations can be searched for an existing kubeconfig file.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-config\-images(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

@@ -1,0 +1,71 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm init phase mark\-control\-plane \- Mark a node as a control\-plane
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm init phase mark\-control\-plane\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Mark a node as a control\-plane
+
+
+.SH OPTIONS
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-node\-name\fP=""
+    Specify the node name.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH EXAMPLE
+.PP
+.RS
+
+.nf
+  # Applies control\-plane label and taint to the current node, functionally equivalent to what executed by kubeadm init.
+  kubeadm init phase mark\-control\-plane \-\-config config.yml
+  
+  # Applies control\-plane label and taint to a specific node
+  kubeadm init phase mark\-control\-plane \-\-node\-name myNode
+
+.fi
+.RE
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-init\-phase(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

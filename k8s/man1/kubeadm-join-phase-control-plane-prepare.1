@@ -1,0 +1,58 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm join phase control\-plane\-prepare \- Prepare the machine for serving a control plane
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm join phase control\-plane\-prepare\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Prepare the machine for serving a control plane
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH EXAMPLE
+.PP
+.RS
+
+.nf
+  # Prepares the machine for serving a control plane
+  kubeadm join phase control\-plane\-prepare all
+
+.fi
+.RE
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-join\-phase(1)\fP, \fBkubeadm\-join\-phase\-control\-plane\-prepare\-all(1)\fP, \fBkubeadm\-join\-phase\-control\-plane\-prepare\-certs(1)\fP, \fBkubeadm\-join\-phase\-control\-plane\-prepare\-control\-plane(1)\fP, \fBkubeadm\-join\-phase\-control\-plane\-prepare\-download\-certs(1)\fP, \fBkubeadm\-join\-phase\-control\-plane\-prepare\-kubeconfig(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

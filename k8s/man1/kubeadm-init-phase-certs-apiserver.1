@@ -1,0 +1,97 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+kubeadm init phase certs apiserver \- Generate the certificate for serving the Kubernetes API
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm init phase certs apiserver\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Generate the certificate for serving the Kubernetes API, and save them into apiserver.cert and apiserver.key files.
+
+.PP
+Default SANs are kubernetes, kubernetes.default, kubernetes.default.svc, kubernetes.default.svc.cluster.local, 10.96.0.1, 127.0.0.1
+
+.PP
+If both files already exist, kubeadm skips the generation step and existing files will be used.
+
+.PP
+Alpha Disclaimer: this command is currently alpha.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-apiserver\-advertise\-address\fP=""
+    The IP address the API Server will advertise it's listening on. If not set the default network interface will be used.
+
+.PP
+\fB\-\-apiserver\-cert\-extra\-sans\fP=[]
+    Optional extra Subject Alternative Names (SANs) to use for the API Server serving certificate. Can be both IP addresses and DNS names.
+
+.PP
+\fB\-\-cert\-dir\fP="/etc/kubernetes/pki"
+    The path where to save and store the certificates.
+
+.PP
+\fB\-\-config\fP=""
+    Path to a kubeadm configuration file.
+
+.PP
+\fB\-\-control\-plane\-endpoint\fP=""
+    Specify a stable IP address or DNS name for the control plane.
+
+.PP
+\fB\-\-csr\-dir\fP=""
+    The path to output the CSRs and private keys to
+
+.PP
+\fB\-\-csr\-only\fP=false
+    Create CSRs instead of generating certificates
+
+.PP
+\fB\-\-kubernetes\-version\fP="stable\-1"
+    Choose a specific Kubernetes version for the control plane.
+
+.PP
+\fB\-\-service\-cidr\fP="10.96.0.0/12"
+    Use alternative range of IP address for service VIPs.
+
+.PP
+\fB\-\-service\-dns\-domain\fP="cluster.local"
+    Use alternative domain for services, e.g. "myorg.internal".
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-init\-phase\-certs(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!
